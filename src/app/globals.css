@@ -1,26 +1,247 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: #e63946;
+  --color-primary-dark: #c62828;
+  --color-primary-light: #ff6b6b;
+  --color-navy: #1a1a2e;
+  --color-navy-light: #16213e;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  background: #ffffff;
+  color: #212529;
+  overflow-x: hidden;
+}
+
+/* ===================== */
+/*  CREATIVE ANIMATIONS  */
+/* ===================== */
+
+/* Animated gradient background */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-gradient {
+  background: linear-gradient(-45deg, #1a1a2e, #2d1b3d, #1a1a2e, #16213e);
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+}
+
+/* Pulse dot */
+@keyframes pulse-dot {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.8);
+    opacity: 0.3;
+  }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float 8s ease-in-out infinite;
+}
+
+.animate-float-fast {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Marquee ticker */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* Scroll indicator bounce */
+@keyframes scroll-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+/* Glow effect */
+@keyframes glow-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(230, 57, 70, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(230, 57, 70, 0.6);
+  }
+}
+
+/* ===================== */
+/*  CREATIVE UTILITIES   */
+/* ===================== */
+
+/* Hero gradient - more dramatic */
+.hero-gradient {
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 46, 0.92) 0%,
+    rgba(26, 26, 46, 0.7) 40%,
+    rgba(230, 57, 70, 0.3) 100%
+  );
+}
+
+/* Glassmorphism cards */
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glass-dark {
+  background: rgba(26, 26, 46, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Section heading accent */
+.section-heading::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--color-primary);
+  margin-top: 16px;
+  border-radius: 2px;
+}
+
+.section-heading-center::after {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Button glow */
+.btn-glow:hover {
+  box-shadow: 0 0 30px rgba(230, 57, 70, 0.4);
+}
+
+.btn-glow-always {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* Dot grid pattern */
+.dot-grid {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(255, 255, 255, 0.08) 1px,
+    transparent 0
+  );
+  background-size: 32px 32px;
+}
+
+/* Diagonal stripes */
+.diagonal-stripes {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 10px,
+    rgba(230, 57, 70, 0.03) 10px,
+    rgba(230, 57, 70, 0.03) 20px
+  );
+}
+
+/* Noise texture overlay */
+.noise-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e63946;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c62828;
+}
+
+/* Wave divider */
+.wave-divider {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.wave-divider svg {
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 60px;
 }

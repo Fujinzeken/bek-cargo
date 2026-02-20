@@ -8,6 +8,9 @@ const inter = Inter({
 });
 
 export const metadata = {
+  icons: {
+    icon: "/favicon.svg",
+  },
   title:
     "BEK CARGO INC — Reliable Trucking & Logistics | Nationwide Freight Services",
   description:

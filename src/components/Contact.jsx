@@ -13,11 +13,31 @@ export default function Contact() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+    setLoading(true);
+    setError("");
+
+    try {
+      const res = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) throw new Error("Failed to submit");
+
+      setSubmitted(true);
+      setFormData({ name: "", email: "", phone: "", message: "" });
+      setTimeout(() => setSubmitted(false), 3000);
+    } catch (err) {
+      setError("Something went wrong. Please try again or call us directly.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -235,16 +255,24 @@ export default function Contact() {
                 />
               </div>
 
+              {error && (
+                <div className="mb-4 p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-sm font-medium">
+                  {error}
+                </div>
+              )}
+
               <motion.button
                 id="quote-submit-btn"
                 type="submit"
-                disabled={submitted}
+                disabled={submitted || loading}
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.99 }}
                 className={`w-full py-4 rounded-xl font-bold text-lg transition-all ${
                   submitted
                     ? "bg-green-500 text-white"
-                    : "bg-primary hover:bg-primary-dark text-white btn-glow shadow-lg shadow-primary/20"
+                    : loading
+                      ? "bg-primary/70 text-white cursor-wait"
+                      : "bg-primary hover:bg-primary-dark text-white btn-glow shadow-lg shadow-primary/20"
                 }`}
               >
                 {submitted ? (
@@ -263,6 +291,29 @@ export default function Contact() {
                       />
                     </svg>
                     Message Sent!
+                  </span>
+                ) : loading ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <svg
+                      className="w-5 h-5 animate-spin"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth={4}
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                      />
+                    </svg>
+                    Sending...
                   </span>
                 ) : (
                   <span className="flex items-center justify-center gap-2">

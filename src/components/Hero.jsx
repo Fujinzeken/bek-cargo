@@ -61,16 +61,15 @@ export default function Hero() {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
           style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1920&q=80')",
+            backgroundImage: "url('/hero-truck.jpg')",
           }}
         />
 
-        {/* Creative gradient overlay - red tint on right */}
-        <div className="absolute inset-0 hero-gradient" />
+        {/* Creative gradient overlay - translucent */}
+        <div className="absolute inset-0 hero-gradient opacity-80" />
 
         {/* Animated dot grid pattern */}
-        <div className="absolute inset-0 dot-grid opacity-40" />
+        <div className="absolute inset-0 dot-grid opacity-20" />
 
         {/* Floating geometric shapes */}
         <div className="absolute top-20 right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-float" />
@@ -189,7 +188,7 @@ export default function Hero() {
                       />
                     </svg>
                   </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary-dark to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute inset-0 bg-linear-to-r from-primary-dark to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
                 </a>
                 <a
                   id="hero-cta-services"

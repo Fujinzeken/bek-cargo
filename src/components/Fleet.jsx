@@ -71,7 +71,7 @@ export default function Fleet() {
                 alt="BEK CARGO fleet of trucks"
                 className="w-full h-[500px] object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-navy/60 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-r from-navy/60 to-transparent" />
 
               {/* Overlay stat */}
               <motion.div
@@ -120,7 +120,7 @@ export default function Fleet() {
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.05] mb-6">
               Built for the
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-light to-primary">
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-primary-light to-primary">
                 Long Haul
               </span>
             </h2>

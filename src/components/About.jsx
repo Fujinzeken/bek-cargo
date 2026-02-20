@@ -44,7 +44,7 @@ export default function About() {
                   alt="BEK CARGO logistics operations at loading dock"
                   className="w-full h-[520px] object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-navy/60 via-transparent to-transparent" />
               </div>
 
               {/* Floating experience badge */}
@@ -111,7 +111,7 @@ export default function About() {
               From Dispatch
               <br />
               to{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-dark">
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-primary-dark">
                 Destination
               </span>
             </h2>

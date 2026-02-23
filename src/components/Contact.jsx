@@ -16,6 +16,9 @@ export default function Contact() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const isValid =
+    formData.name.trim() && formData.email.trim() && formData.message.trim();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -264,15 +267,21 @@ export default function Contact() {
               <motion.button
                 id="quote-submit-btn"
                 type="submit"
-                disabled={submitted || loading}
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.99 }}
+                disabled={!isValid || submitted || loading}
+                whileHover={
+                  isValid && !submitted && !loading ? { scale: 1.01 } : {}
+                }
+                whileTap={
+                  isValid && !submitted && !loading ? { scale: 0.99 } : {}
+                }
                 className={`w-full py-4 rounded-xl font-bold text-lg transition-all ${
                   submitted
                     ? "bg-green-500 text-white"
                     : loading
                       ? "bg-primary/70 text-white cursor-wait"
-                      : "bg-primary hover:bg-primary-dark text-white btn-glow shadow-lg shadow-primary/20"
+                      : !isValid
+                        ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                        : "bg-primary hover:bg-primary-dark text-white btn-glow shadow-lg shadow-primary/20"
                 }`}
               >
                 {submitted ? (
